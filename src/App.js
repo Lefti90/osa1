@@ -31,6 +31,7 @@ const Header = (props) => {
 }
 
 const Content = (content) => {
+  console.log(content)
   return(
     <div>
       {content.parts.map(x =><p>{x.name} {x.exercises}</p>)}
@@ -41,7 +42,7 @@ const Content = (content) => {
 
 const Total = (total) =>{
   let x = 0;
-  total.parts.forEach(y => {x = x+y.exercises})
+  total.parts.forEach(y => {x += y.exercises})
   return(
     <div>
       <p>Number of exercises {x}</p>
