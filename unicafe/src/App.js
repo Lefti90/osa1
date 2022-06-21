@@ -53,20 +53,31 @@ const App = () => {
     setBad(newValue)
   }
 
-
-
-  return (
-    <div>
+  if(good==0 && bad==0 && neutral==0){
+    return(
+      <div>
       <Header text='give feedback'/>
       <Button handleClick={() => setGoodValue(good + 1)} text="good" />
       <Button handleClick={() => setNeutralValue(neutral + 1)} text="neutral" />
       <Button handleClick={() => setBadValue(bad + 1)} text="bad" />
       <Header text='statistics'/>
+      <p>No feedback given</p>
+      </div>
+    )
+  }else{
+    return (
+      <div>
+        <Header text='give feedback'/>
+        <Button handleClick={() => setGoodValue(good + 1)} text="good" />
+        <Button handleClick={() => setNeutralValue(neutral + 1)} text="neutral" />
+        <Button handleClick={() => setBadValue(bad + 1)} text="bad" />
+        <Header text='statistics'/>  
+        <Statistics good={good} neutral={neutral} bad={bad}/>
+        <CombinedValues good={good} neutral={neutral} bad={bad}/>
+      </div>
+    )
+  }
 
-      <Statistics good={good} neutral={neutral} bad={bad}/>
-      <CombinedValues good={good} neutral={neutral} bad={bad}/>
-    </div>
-  )
 }
 
 export default App
