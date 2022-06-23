@@ -32,6 +32,16 @@ const Statistics = (props) => {
   )
 }
 
+const Table = (props) => {
+  const table = [0, 1]
+  console.log(props)
+  return(
+    <div>
+      <p>{}</p>
+    </div>
+  )
+}
+
 const App = () => {
   // tallenna napit omaan tilaansa
   const [good, setGood] = useState(0)
@@ -75,6 +85,9 @@ const App = () => {
         <Button handleClick={() => setBadValue(bad + 1)} text="bad" />
         <Header text='statistics'/>  
         <Statistics good={good} neutral={neutral} bad={bad} avg={avg}/>
+        <p>Taulukko</p>
+        <Table good={good} neutral={neutral} bad={bad} avg={avg}/>
+
       </div>
     )
   }
