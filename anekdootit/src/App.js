@@ -7,7 +7,7 @@ const Button = (props) => (
   </button>
 )
 
-
+var currentNumber = 0
 
 const App = () => {
   const anecdotes = [
@@ -21,20 +21,35 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [current, setCurrent] = useState(currentNumber)
+  const votesZero = new Uint8Array(anecdotes.length);
+  const votes = [...votesZero]
+
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
 
   const randomizeAnecdote = newState =>{
-    newState = getRandomInt(anecdotes.length)
+    currentNumber = getRandomInt(anecdotes.length)
+    newState = currentNumber
     setSelected(newState)
   }
 
+  const voteCurrent = current => {
+      votes[current] += 1
+      setCurrent(current)
+      console.log('voteCurrent: ', current)
+  }
+
+  console.log('current: ', currentNumber)
+  console.log('votes: ', votes[currentNumber])
   return (
     <div>
-      <p><Button handleClick={() => randomizeAnecdote()} text='next'/></p>
-      {anecdotes[selected]}      
+      <p><Button handleClick={() => randomizeAnecdote()} text='next anecdote'/></p>
+      <p><Button handleClick={() => voteCurrent(current + 1)} text='vote'/></p>
+      {anecdotes[selected]}
+      <p>has {votes[currentNumber]} votes</p>
     </div>
   )
 }
