@@ -18,11 +18,11 @@ const StatisticsLine = (props) => {
 
 const Statistics = (props) => {
   const totalValue = props.good + props.neutral + props.bad
-  const averageValue = props.avg / 3
+  const averageValue = props.avg / totalValue
   const positiveValue = props.good / totalValue * 100
   return (
     <div>  
-      <Table good={props.good} neutral={props.neutral} bad={props.bad} avg={props.avg} all={totalValue} positiveValue={positiveValue}/>  
+      <Table good={props.good} neutral={props.neutral} bad={props.bad} averageValue={averageValue} all={totalValue} positiveValue={positiveValue}/>  
     </div>
   )
 }
@@ -51,7 +51,7 @@ const Table = (props) => {
         </tr>
         <tr>
           <td>average</td>
-          <td><StatisticsLine value={props.avg} /></td>
+          <td><StatisticsLine value={props.averageValue} /></td>
         </tr>
         <tr>
           <td>positive</td>
