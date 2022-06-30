@@ -12,7 +12,7 @@ const Button = (props) => (
 
 const StatisticsLine = (props) => {
   return(
-  <p>{props.text} {props.value} {props.symbol}</p>
+  <div>{props.text} {props.value} {props.symbol}</div>
   )
 }
 
@@ -21,13 +21,8 @@ const Statistics = (props) => {
   const averageValue = props.avg / 3
   const positiveValue = props.good / totalValue * 100
   return (
-    <div>
-      <StatisticsLine text="good" value={props.good}/> 
-      <StatisticsLine text="neutral" value={props.neutral}/>      
-      <StatisticsLine text="bad" value={props.bad}/>      
-      <StatisticsLine text="all" value={totalValue}/>      
-      <StatisticsLine text="average" value={averageValue}/>      
-      <StatisticsLine text="positive" value={positiveValue} symbol='%'/>     
+    <div>  
+      <Table good={props.good} neutral={props.neutral} bad={props.bad} avg={props.avg} all={totalValue} positiveValue={positiveValue}/>  
     </div>
   )
 }
@@ -36,9 +31,34 @@ const Table = (props) => {
   const table = [0, 1]
   console.log(props)
   return(
-    <div>
-      <p>{}</p>
-    </div>
+    <table>
+      <tbody>
+        <tr>
+          <td>good</td>
+          <td><StatisticsLine value={props.good} /></td>
+        </tr>
+        <tr>
+          <td>neutral</td>
+          <td><StatisticsLine value={props.neutral} /></td>
+        </tr>
+        <tr>
+          <td>bad</td>
+          <td><StatisticsLine value={props.bad} /></td>
+        </tr>
+        <tr>
+          <td>all</td>
+          <td><StatisticsLine value={props.all} /></td>
+        </tr>
+        <tr>
+          <td>average</td>
+          <td><StatisticsLine value={props.avg} /></td>
+        </tr>
+        <tr>
+          <td>positive</td>
+          <td><StatisticsLine value={props.positiveValue} symbol='%'/></td>
+        </tr>
+      </tbody>
+    </table>
   )
 }
 
@@ -85,9 +105,6 @@ const App = () => {
         <Button handleClick={() => setBadValue(bad + 1)} text="bad" />
         <Header text='statistics'/>  
         <Statistics good={good} neutral={neutral} bad={bad} avg={avg}/>
-        <p>Taulukko</p>
-        <Table good={good} neutral={neutral} bad={bad} avg={avg}/>
-
       </div>
     )
   }
