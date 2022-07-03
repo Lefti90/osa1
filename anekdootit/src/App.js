@@ -10,6 +10,9 @@ const Button = (props) => (
 var currentNumber = 0
 const votesZero = new Uint8Array(7);
 const votes = [...votesZero]
+var max = 0
+var index = 0
+
 
 const App = () => {
   const anecdotes = [
@@ -25,8 +28,6 @@ const App = () => {
   const [selected, setSelected] = useState(0)
   const [current, setCurrent] = useState(0)
 
-
-
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
@@ -38,8 +39,11 @@ const App = () => {
   }
 
   const voteCurrent = current => {
-      votes[currentNumber] += 1
-      setCurrent(current + 1)
+    votes[currentNumber] += 1
+    setCurrent(current + 1) 
+    max = Math.max(...votes)
+    index = votes.indexOf(max)
+    console.log('hindex: ',index)
   }
 
   console.log(votes)
@@ -47,10 +51,14 @@ const App = () => {
   console.log('votes: ', votes[currentNumber])
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p><Button handleClick={() => randomizeAnecdote()} text='next anecdote'/></p>
       <p><Button handleClick={() => voteCurrent(current)} text='vote'/></p>
       {anecdotes[selected]}
       <p>has {votes[currentNumber]} votes</p>
+      <h1>Anecdote with most votes</h1>
+      <p>{anecdotes[index]}</p>
+      <p>has {votes[index]} votes</p>
     </div>
   )
 }
