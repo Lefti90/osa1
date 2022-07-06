@@ -1,5 +1,4 @@
 const Course = (props) => {
-  console.log('Course: ', props.name)
   return(
   <div>
     <h1>{props.coursename}</h1>
@@ -12,6 +11,7 @@ const Course = (props) => {
 }
 
 const App = () => {
+
   const course = {
     name: 'Half Stack application development',
     id: 1,
@@ -33,9 +33,14 @@ const App = () => {
       }
     ]
   }
+  const total = course.parts.reduce((previousValue, currentValue) => {
+    console.log('pV ',previousValue, 'cV ', currentValue.exercises)
+    return previousValue + currentValue.exercises
+  },0)
   return (
     <div>
       <Course course={course} coursename={course.name} parts={course.parts}/>
+      <b>Total of {total} exercises</b>
     </div>
   )
 }
