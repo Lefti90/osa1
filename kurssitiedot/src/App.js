@@ -1,7 +1,5 @@
 const Part = (props) =>{
-  console.log('Part: ', props.parts[0].name)
   const total = props.parts.reduce((previousValue, currentValue) => {
-  console.log('pV ',previousValue, 'cV ', currentValue.exercises)
   return previousValue + currentValue.exercises
 },0)
   return(
@@ -20,7 +18,7 @@ const Courses = (props) => {
   <div>   
       {props.courses.map(course => {        
         return (
-          <div>
+          <div key={course.id}>
             <h2 key={course.id}>{course.name}</h2>
             <Part parts={course.parts}/>
           </div>
